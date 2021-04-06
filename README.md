@@ -1,5 +1,7 @@
 # my-proj
 
+{./screens/screen1.jpg}
+
 ## Build Setup
 
 ```bash
