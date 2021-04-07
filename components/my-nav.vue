@@ -1,5 +1,5 @@
 <template>
-    <v-app-bar app flat color="white">
+    <v-app-bar app flat color="white" class="nav-content-container">
 
         <div class=" container-logo d-flex justify-space-between align-center">
             <v-btn text>
@@ -171,9 +171,9 @@
 </script>
 
 <style lang="scss" scoped>
-        .special-button {
-            padding: 22px 20px !important;
-        }
+    .special-button {
+        padding: 22px 20px !important;
+    }
     .v-btn {
         text-transform: none;
     }

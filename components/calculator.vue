@@ -13,15 +13,20 @@
                         <v-col
                             cols="12"
                             md="4"
+                            class="input-cuntainer"
                         >
                             <v-form ref="form">
                             <v-text-field
+                                class="custom-text-field"
+                                outlined
+                                hide-details
                                 v-model="model"
                                 :counter="max"
                                 :rules="rules"
-                                label="First name"
+                                label="Стоимость автомобиля"
                             ></v-text-field>
                             <v-slider
+                            class="custom-slider"
                             v-model="max"
                             >
                             </v-slider>
@@ -58,14 +63,6 @@
           rules.push(rule)
         }
 
-        if (!this.allowSpaces) {
-          const rule =
-            v => (v || '').indexOf(' ') < 0 ||
-              'No spaces are allowed'
-
-          rules.push(rule)
-        }
-
         if (this.match) {
           const rule =
             v => (!!v && v) === this.match ||
@@ -92,6 +89,17 @@
 </script>
 
 <style lang="scss" scoped>
+    .input-cuntainer {
+      .custom-text-field {
+        border: none;
+        background-color: #F3F3F4;
+        border-radius: 10px;
+      }
+      .custom-slider {
+        position: relative;
+        top: -16px;
+      }
+    }
     .calc-cont {
         h1 {
             font-family: Nekst;
