@@ -2,7 +2,6 @@
     <v-container>
         <v-carousel
             cycle
-            rounded
             height="400"
             hide-delimiter-background
             show-arrows-on-hover

@@ -15,28 +15,99 @@
                             md="4"
                             class="input-cuntainer"
                         >
-                            <v-form ref="form">
-                            <v-text-field
-                                class="custom-text-field"
-                                outlined
-                                hide-details
-                                v-model="model"
-                                :counter="max"
-                                :rules="rules"
-                                label="Стоимость автомобиля"
-                            ></v-text-field>
-                            <v-slider
-                            class="custom-slider"
-                            v-model="max"
-                            >
-                            </v-slider>
-                            </v-form>
+                              <v-form ref="form">
+                                <p>Стоимость автомобиля</p>
+                                <v-text-field
+                                    class="custom-text-field"
+                                    height='68px'
+                                    type="number"
+                                    outlined
+                                    hide-details
+                                    v-model="price"
+                                    :counter="max"
+                                >
+                                <h2
+                                slot="append"
+                                >₽</h2>
+                                </v-text-field>
+                                <v-slider
+                                :min='1000000'
+                                :max='6000000'
+                                class="custom-slider"
+                                v-model="price"
+                                >
+                                </v-slider>
+                              </v-form>
+                        </v-col>
+                        <v-col
+                            cols="12"
+                            md="4"
+                            class="input-cuntainer"
+                        >
+                              <v-form ref="form">
+                                <p>Первоначальный взнос</p>
+                                <v-text-field
+                                    class="custom-text-field"
+                                    height='68px'
+                                    outlined
+                                    hide-details
+                                    v-model="firstRentValue"
+                                    :counter="max"
+                                >
+                                <h2
+                                slot="append"
+                                >{{firstRentPercent}}%</h2>
+                                </v-text-field>
+                                <v-slider
+                                class="custom-slider"
+                                :min="10"
+                                :max="60"
+                                v-model="firstRentPercent"
+                                >
+                                </v-slider>
+                              </v-form>
+                        </v-col>
+                        <v-col
+                            cols="12"
+                            md="4"
+                            class="input-cuntainer"
+                        >
+                              <v-form ref="form">
+                                <p>Срок лизинга</p>
+                                <v-text-field
+                                    class="custom-text-field"
+                                    height='68px'
+                                    outlined
+                                    hide-details
+                                    v-model="duration"
+                                    :counter="max"
+                                    :rules="rules"
+                                >
+                                <h2
+                                slot="append"
+                                >мес.</h2>
+                                </v-text-field>
+                                <v-slider
+                                class="custom-slider"
+                                :min="1"
+                                :max="60"
+                                v-model="duration"
+                                >
+                                </v-slider>
+                              </v-form>
                         </v-col>
                     </v-row>
                 </v-container>
             </v-row>
             <v-row>
-                <p>Элемент</p><p>Элемент</p><p>Элемент</p>
+                <v-col>
+                  <p>Сумма договора лизинга</p>
+                  <h2>4461313</h2>
+                </v-col>
+                <v-col>
+                  <p>Сумма договора лизинга</p>
+                  <h2>{{x}}</h2>
+                </v-col>
             </v-row>
         </v-col>
     </v-container>
@@ -46,12 +117,18 @@
 <script>
   export default {
     data: () => ({
+      x: 99999,
       allowSpaces: false,
       max: 0,
-      model: 'Foobar',
+      price: 1000000,
+      firstRentPercent: 10,
+      duration: 1,
     }),
 
     computed: {
+      firstRentValue() {
+        return Math.round(this.price / 100 * this.firstRentPercent);
+      },
       rules () {
         const rules = []
 
@@ -91,6 +168,18 @@
 <style lang="scss" scoped>
     .input-cuntainer {
       .custom-text-field {
+          font-family: Nekst;
+          font-style: normal;
+          font-weight: 900;
+          font-size: 30px;
+
+        h2 {
+          font-family: Nekst;
+          font-style: normal;
+          font-weight: 900;
+          font-size: 30px;
+        }
+
         border: none;
         background-color: #F3F3F4;
         border-radius: 10px;
