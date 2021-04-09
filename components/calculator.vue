@@ -24,7 +24,6 @@
                                     outlined
                                     hide-details
                                     v-model="price"
-                                    :counter="max"
                                 >
                                 <h2
                                 slot="append"
@@ -52,7 +51,6 @@
                                     outlined
                                     hide-details
                                     v-model="firstRentValue"
-                                    :counter="max"
                                 >
                                 <h2
                                 slot="append"
@@ -80,7 +78,6 @@
                                     outlined
                                     hide-details
                                     v-model="duration"
-                                    :counter="max"
                                     :rules="rules"
                                 >
                                 <h2
@@ -99,14 +96,14 @@
                     </v-row>
                 </v-container>
             </v-row>
-            <v-row>
+            <v-row class="values-container">
                 <v-col>
                   <p>Сумма договора лизинга</p>
-                  <h2>4461313</h2>
+                  <h1>{{ contractSumm }}</h1>
                 </v-col>
                 <v-col>
-                  <p>Сумма договора лизинга</p>
-                  <h2>{{x}}</h2>
+                  <p>Ежемесячный платеж</p>
+                  <h1>{{monthlyPayment}}</h1>
                 </v-col>
             </v-row>
         </v-col>
@@ -117,17 +114,28 @@
 <script>
   export default {
     data: () => ({
-      x: 99999,
-      allowSpaces: false,
-      max: 0,
       price: 1000000,
       firstRentPercent: 10,
       duration: 1,
+      interestRate: 1.5,
     }),
 
     computed: {
+      percentageInterestRate() {
+        return this.interestRate / 100;
+      },
+      monthlyPayment() {
+        const p = this.interestRate / 100;
+        return Math.round( ( ( this.price - this.firstRentValue ) * ( p + ( p / ( Math.pow( ( 1 + p ), this.duration ) - 1 ) ) ) ) )
+      },
+      contractSumm() {
+        return this.firstRentValue + ( this.duration * this.monthlyPayment );
+      },
       firstRentValue() {
-        return Math.round(this.price / 100 * this.firstRentPercent);
+        return Math.round( ( this.price / 100 ) * this.firstRentPercent );
+      },
+      dealSumm() {
+        return this.firstRentPercent + duration
       },
       rules () {
         const rules = []
@@ -166,6 +174,24 @@
 </script>
 
 <style lang="scss" scoped>
+    .values-container {
+      p {
+        font-family: Gilroy;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px;
+        line-height: 150%;
+        color: #575757;
+      }
+      h1 {
+        font-family: Nekst-Black;
+        font-style: normal;
+        font-weight: 900;
+        font-size: 54px;
+        line-height: 90%;
+        color: #575757;
+      }
+    }
     .input-cuntainer {
       .custom-text-field {
           font-family: Nekst;
