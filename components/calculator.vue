@@ -238,7 +238,7 @@
 </script>
 
 <style lang="scss" scoped>
-    $dialog-margin: 0px;
+    
     .make-form-btn {
       box-shadow: none !important;
       height: 68px !important;
