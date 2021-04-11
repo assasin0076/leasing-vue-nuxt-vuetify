@@ -1,128 +1,129 @@
 <template>
-    <v-app-bar app flat color="white" class="nav-content-container">
+    <v-container fluid >
+        <v-app-bar app flat color="white" class="nav-content-container clls"  >
 
-        <div class=" container-logo d-flex justify-space-between align-center">
-            <v-btn text>
-                <img src="/img/LeasingCar.svg" alt="">
-                <img src="/img/LeasingCar-1.svg" alt="">
-            </v-btn>
-            <v-divider
-                class="d-none d-sm-flex"
-                inset
-                vertical
-            ></v-divider>
-            <p class="d-none d-sm-flex">лизинговая компания</p>
-        </div>
-        
-
-        <v-spacer />
-        
-        <div class="text-center">
-            <v-dialog
-            v-model="dialog"
-            width="500"
-            transition="dialog-top-transition"
-            >
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn
-                class="d-lg-none"
-                color="#2A3B4D"
-                icon
-                v-bind="attrs"
-                v-on="on"
-                >
-                    <v-icon dark>
-                        mdi-menu
-                    </v-icon>
+            <div class=" container-logo d-flex justify-space-between align-center">
+                <v-btn text>
+                    <img src="/img/LeasingCar.svg" alt="">
+                    <img src="/img/LeasingCar-1.svg" alt="">
                 </v-btn>
-            </template>
+                <v-divider
+                    class="d-none d-md-flex"
+                    inset
+                    vertical
+                ></v-divider>
+                <p class="d-none d-md-flex">лизинговая компания</p>
+            </div>
+            
 
-            <v-card class='burger-menu'>
-                <v-card-title class="headline lighten-2 float-right">
-                <v-btn
-                    class="float-right"
+            <v-spacer />
+            
+            <div class="text-center">
+                <v-dialog
+                v-model="dialog"
+                width="500"
+                transition="dialog-top-transition"
+                >
+                <template v-slot:activator="{ on, attrs }">
+                    <v-btn
+                    class="d-lg-none"
                     color="#2A3B4D"
                     icon
-                    @click="dialog = false"
-                >
-                    <v-icon dark>
-                        mdi-close
-                    </v-icon>
-                </v-btn>
-                </v-card-title>
+                    v-bind="attrs"
+                    v-on="on"
+                    >
+                        <v-icon dark>
+                            mdi-menu
+                        </v-icon>
+                    </v-btn>
+                </template>
 
-                <v-card-text class="burger-menu-elements-container">
-                    <v-list class="">
-                        <v-col>
-                            <v-list-item
-                            v-for="(item, index) in navItems.filter((el) => !especialyButtons.includes(el.title))"
-                            :key="index"
-                            >
-                            <v-list-item-title class="simple-button"><v-btn v-bind="item.attr" class="simple-button">{{ item.title }}</v-btn></v-list-item-title>
-                            </v-list-item>
-                        </v-col>
-                        <v-col>
-                            <v-list-item
-                            v-for="(item, index) in navItems.filter((el) => especialyButtons.includes(el.title))"
-                            :key="index"
-                            >
-                            <v-list-item-title class="d-flex justify-center"><v-btn rounded dark color="#ff9514" class="special-button">{{ item.title }}</v-btn></v-list-item-title>
-                            </v-list-item>
-                        </v-col>
+                <v-card class='burger-menu'>
+                    <v-card-title class="headline lighten-2 float-right">
+                    <v-btn
+                        class="float-right"
+                        color="#2A3B4D"
+                        icon
+                        @click="dialog = false"
+                    >
+                        <v-icon dark>
+                            mdi-close
+                        </v-icon>
+                    </v-btn>
+                    </v-card-title>
 
-                    </v-list>
-                </v-card-text>
-
-
-                <v-card-actions>
-                <v-spacer></v-spacer>
-                
-                </v-card-actions>
-            </v-card>
-            </v-dialog>
-        </div>
-        <div class="text-center nav-elements-container d-none d-lg-flex">
-            <div class="d-flex flex-row">
-                <div 
-                v-for="(item, index) in navItems"
-                :key="index"
-                >
-                    <div>
-                        <v-btn v-if="item.type == 'btn'" v-bind="item.attr">
-                            {{ item.title }}
-                        </v-btn>
-                        <v-menu v-if="item.type == 'droping'" open-on-hover offset-y>
-                            <template v-slot:activator="{ on, attrs }">
-                                <v-btn
-                                text
-                                v-bind="attrs"
-                                v-on="on"
-                                >
-                                    {{ item.title }}
-                                </v-btn>
-                            </template>
-
-                            <v-list>
+                    <v-card-text class="burger-menu-elements-container">
+                        <v-list class="">
+                            <v-col>
                                 <v-list-item
-                                v-for="(innerItem, index) in item.inner"
+                                v-for="(item, index) in navItems.filter((el) => !especialyButtons.includes(el.title))"
                                 :key="index"
                                 >
-                                    <v-list-item-title>
-                                        <v-btn v-bind='innerItem.attr'>
-                                            {{ innerItem.title }}
-                                        </v-btn>
-                                        
-                                    </v-list-item-title>
+                                <v-list-item-title class="simple-button"><v-btn v-bind="item.attr" class="simple-button">{{ item.title }}</v-btn></v-list-item-title>
                                 </v-list-item>
-                            </v-list>
-                        </v-menu>
+                            </v-col>
+                            <v-col>
+                                <v-list-item
+                                v-for="(item, index) in navItems.filter((el) => especialyButtons.includes(el.title))"
+                                :key="index"
+                                >
+                                <v-list-item-title class="d-flex justify-center"><v-btn rounded dark color="#ff9514" class="special-button">{{ item.title }}</v-btn></v-list-item-title>
+                                </v-list-item>
+                            </v-col>
+
+                        </v-list>
+                    </v-card-text>
+
+
+                    <v-card-actions>
+                    <v-spacer></v-spacer>
+                    
+                    </v-card-actions>
+                </v-card>
+                </v-dialog>
+            </div>
+            <div class="text-center nav-elements-container d-none d-lg-flex">
+                <div class="d-flex flex-row">
+                    <div 
+                    v-for="(item, index) in navItems"
+                    :key="index"
+                    >
+                        <div>
+                            <v-btn v-if="item.type == 'btn'" v-bind="item.attr">
+                                {{ item.title }}
+                            </v-btn>
+                            <v-menu v-if="item.type == 'droping'" open-on-hover offset-y>
+                                <template v-slot:activator="{ on, attrs }">
+                                    <v-btn
+                                    text
+                                    v-bind="attrs"
+                                    v-on="on"
+                                    >
+                                        {{ item.title }}
+                                    </v-btn>
+                                </template>
+
+                                <v-list>
+                                    <v-list-item
+                                    v-for="(innerItem, index) in item.inner"
+                                    :key="index"
+                                    >
+                                        <v-list-item-title>
+                                            <v-btn v-bind='innerItem.attr'>
+                                                {{ innerItem.title }}
+                                            </v-btn>
+                                            
+                                        </v-list-item-title>
+                                    </v-list-item>
+                                </v-list>
+                            </v-menu>
+                        </div>
                     </div>
-                </div>
-            </div >
-        </div>
-        
-    </v-app-bar>
-    
+                </div >
+            </div>
+            
+        </v-app-bar>
+    </v-container>    
 </template>
 
 <script>
@@ -171,6 +172,9 @@
 </script>
 
 <style lang="scss" scoped>
+    .clls {
+        padding: 0px 64px;
+    }
     .special-button {
         padding: 22px 20px !important;
     }

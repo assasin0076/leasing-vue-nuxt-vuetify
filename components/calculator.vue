@@ -1,11 +1,10 @@
 <template>
-    <v-container class="calc-cont">
+    <v-container class="calc-cont" fluid>
         <v-col>
-            <h1 class="mb-10">
+            <h1 class="mb-16">
                     Рассчитайте стоимость <br> автомобиля в лизинг
             </h1>
             <v-row>
-                <v-container>
                     <v-row
 
                     justify="space-between"
@@ -16,9 +15,10 @@
                             class="input-cuntainer"
                         >
                               <v-form ref="form">
-                                <p>Стоимость автомобиля</p>
+                                <p class="mb-8">Стоимость автомобиля</p>
                                 <v-text-field
-                                    class="custom-text-field"
+                                    color="orange"
+                                    class="custom-text-field disabled-custom-field"
                                     height='68px'
                                     type="number"
                                     outlined
@@ -30,6 +30,9 @@
                                 >₽</h2>
                                 </v-text-field>
                                 <v-slider
+                                track-color="#E1E1E1"
+                                track-fill-color="#FF9514"
+                                color="#FF9514"
                                 :min='1000000'
                                 :max='6000000'
                                 class="custom-slider"
@@ -44,12 +47,14 @@
                             class="input-cuntainer"
                         >
                               <v-form ref="form">
-                                <p>Первоначальный взнос</p>
+                                <p class="mb-8">Первоначальный взнос</p>
                                 <v-text-field
+                                    color="orange"
                                     class="custom-text-field"
                                     height='68px'
                                     outlined
                                     hide-details
+                                    readonly
                                     v-model="firstRentValue"
                                 >
                                 <h2
@@ -57,6 +62,9 @@
                                 >{{firstRentPercent}}%</h2>
                                 </v-text-field>
                                 <v-slider
+                                track-color="#E1E1E1"
+                                track-fill-color="#FF9514"
+                                color="#FF9514"
                                 class="custom-slider"
                                 :min="10"
                                 :max="60"
@@ -70,9 +78,10 @@
                             md="4"
                             class="input-cuntainer"
                         >
-                              <v-form ref="form">
-                                <p>Срок лизинга</p>
+                              <v-form ref="form" >
+                                <p class="mb-8">Срок лизинга</p>
                                 <v-text-field
+                                    color="orange"
                                     class="custom-text-field"
                                     height='68px'
                                     outlined
@@ -85,6 +94,9 @@
                                 >мес.</h2>
                                 </v-text-field>
                                 <v-slider
+                                track-color="#E1E1E1"
+                                track-fill-color="#FF9514"
+                                color="#FF9514"
                                 class="custom-slider"
                                 :min="1"
                                 :max="60"
@@ -94,16 +106,67 @@
                               </v-form>
                         </v-col>
                     </v-row>
-                </v-container>
             </v-row>
-            <v-row class="values-container">
+            <v-row class="values-container mb-16">
                 <v-col>
-                  <p>Сумма договора лизинга</p>
+                  <p class="mb-8">Сумма договора лизинга</p>
                   <h1>{{ contractSumm }}</h1>
                 </v-col>
                 <v-col>
-                  <p>Ежемесячный платеж</p>
+                  <p class="mb-8">Ежемесячный платеж</p>
                   <h1>{{monthlyPayment}}</h1>
+                </v-col>
+                <v-col class="d-flex align-center">
+                  <template>
+                    <v-row justify="center">
+                      <v-dialog
+                        v-model="dialog"
+                        width="100%"
+                      >
+
+                        <template v-slot:activator="{ on, attrs }">
+                          <v-btn rounded dark color="#ff9514" class="make-form-btn" v-bind="attrs" v-on="on">Оставить заявку</v-btn>
+                        </template>
+
+                        <v-card>
+                          <v-card-title>
+                            <span class="headline">User Profile</span>
+                          </v-card-title>
+                          <v-card-text>
+                            <v-container>
+                              <v-row>
+                                
+                                <v-col cols="12">
+                                  <v-text-field
+                                    label="Email*"
+                                    required
+                                  ></v-text-field>
+                                </v-col>
+                                <v-col cols="12">
+                                  <v-text-field
+                                    label="Password*"
+                                    type="password"
+                                    required
+                                  ></v-text-field>
+                                </v-col>
+                              </v-row>
+                            </v-container>
+                            <small>*indicates required field</small>
+                          </v-card-text>
+                          <v-card-actions>
+                            <v-spacer></v-spacer>
+                            <v-btn
+                              color="blue darken-1"
+                              text
+                              @click="dialog = false"
+                            >
+                              Close
+                            </v-btn>
+                          </v-card-actions>
+                        </v-card>
+                      </v-dialog>
+                    </v-row>
+                  </template>
                 </v-col>
             </v-row>
         </v-col>
@@ -114,6 +177,7 @@
 <script>
   export default {
     data: () => ({
+      dialog: false,
       price: 1000000,
       firstRentPercent: 10,
       duration: 1,
@@ -174,6 +238,19 @@
 </script>
 
 <style lang="scss" scoped>
+    $dialog-margin: 0px;
+    .make-form-btn {
+      box-shadow: none !important;
+      height: 68px !important;
+      padding: 14px 70px 18px 70px !important;
+      font-family: Nekst;
+      font-style: normal;
+      font-weight: 900;
+      font-size: 30px !important;
+      line-height: 36px;
+      text-transform: none !important;
+      border-radius: 200px;
+    }
     .values-container {
       p {
         font-family: Gilroy;
@@ -198,17 +275,22 @@
           font-style: normal;
           font-weight: 900;
           font-size: 30px;
+          border: none;
+          background-color: #F3F3F4;
+          border-radius: 10px;
 
-        h2 {
-          font-family: Nekst;
-          font-style: normal;
-          font-weight: 900;
-          font-size: 30px;
-        }
+          .v-text-field__slot {
+            height: 10000px;
+          }
+          h2 {
+            font-family: Nekst;
+            font-style: normal;
+            font-weight: 900;
+            font-size: 30px;
+            color: #575757;
+          }
 
-        border: none;
-        background-color: #F3F3F4;
-        border-radius: 10px;
+        
       }
       .custom-slider {
         position: relative;
