@@ -1,6 +1,6 @@
 # my-proj
 
-![alt text](screens/screen1.jpg "Описание будет тут")
+![alt text](screens/screen1.png "Описание будет тут")
 
 ## Build Setup
 
