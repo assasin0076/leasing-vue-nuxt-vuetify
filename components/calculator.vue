@@ -130,8 +130,11 @@
 
                         <v-card>
                           <v-card-title>
-                            <span class="headline">User Profile</span>
+                            <span class="headline mb-8 header-text"><p class="header-text">Онлайн-заявка</p></span>
                           </v-card-title>
+                          <v-card-subtitle class="">
+                            <span>Заполните форму, и мы вскоре свяжемся с вами, чтобы ответить на все вопросы</span>
+                          </v-card-subtitle>
                           <v-card-text>
                             <v-container>
                               <v-row>
