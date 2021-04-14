@@ -1,17 +1,18 @@
 <template>
     <v-container class="calc-cont" fluid>
+        <v-text-field v-bind:options='{inputMask:"(###) ### ## ##"}'>
+        </v-text-field>
         <v-col>
             <h1 class="mb-16">
                     Рассчитайте стоимость <br> автомобиля в лизинг
             </h1>
-            <v-row>
-                    <v-row
 
-                    justify="space-between"
+                    <div
+                    class="d-flex flex-column flex-lg-row"
                     >
                         <v-col
                             cols="12"
-                            md="4"
+                            lg="4"
                             class="input-cuntainer"
                         >
                               <v-form ref="form">
@@ -43,7 +44,7 @@
                         </v-col>
                         <v-col
                             cols="12"
-                            md="4"
+                            lg="4"
                             class="input-cuntainer"
                         >
                               <v-form ref="form">
@@ -75,7 +76,7 @@
                         </v-col>
                         <v-col
                             cols="12"
-                            md="4"
+                            lg="4"
                             class="input-cuntainer"
                         >
                               <v-form ref="form" >
@@ -105,20 +106,19 @@
                                 </v-slider>
                               </v-form>
                         </v-col>
-                    </v-row>
-            </v-row>
+                    </div>
             <v-row class="values-container mb-16">
-                <v-col>
+                <v-col class="mb-5">
                   <p class="mb-8">Сумма договора лизинга</p>
-                  <h1>{{ contractSumm }}</h1>
+                  <h1>{{ formatedContractSumm }}</h1>
                 </v-col>
-                <v-col>
+                <v-col class="mb-5">
                   <p class="mb-8">Ежемесячный платеж</p>
-                  <h1>{{monthlyPayment}}</h1>
+                  <h1>{{ formatedMonthlyPayment }}</h1>
                 </v-col>
                 <v-col class="d-flex align-center">
                   <template>
-                    <v-row justify="center">
+                    <v-row>
                       <v-dialog
                         v-model="dialog"
                         width="100%"
@@ -173,18 +173,21 @@
                 </v-col>
             </v-row>
         </v-col>
+        
     </v-container>
 </template>
 
 
 <script>
   export default {
+    
     data: () => ({
       dialog: false,
       price: 1000000,
       firstRentPercent: 10,
       duration: 1,
       interestRate: 1.5,
+      calcVal: ''
     }),
 
     computed: {
@@ -197,6 +200,12 @@
       },
       contractSumm() {
         return this.firstRentValue + ( this.duration * this.monthlyPayment );
+      },
+      formatedContractSumm() {
+        return `${new Intl.NumberFormat().format(this.contractSumm)} ₽`
+      },
+      formatedMonthlyPayment() {
+        return `${new Intl.NumberFormat().format(this.monthlyPayment)} ₽`
       },
       firstRentValue() {
         return Math.round( ( this.price / 100 ) * this.firstRentPercent );
@@ -228,14 +237,13 @@
     },
 
     watch: {
-      max: 'validateField',
-      model: 'validateField',
+      calcVal: 'doCalc'
     },
 
     methods: {
-      validateField () {
-        this.$refs.form.validate()
-      },
+      doCalc() {
+        console.log(this.$refs.inp)
+      }
     },
   }
 </script>

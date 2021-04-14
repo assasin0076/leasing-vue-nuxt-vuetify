@@ -172,9 +172,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .clls {
-        padding: 0px 64px;
-    }
     .special-button {
         padding: 22px 20px !important;
     }
