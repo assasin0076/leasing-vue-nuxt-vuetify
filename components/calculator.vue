@@ -1,7 +1,5 @@
 <template>
     <v-container class="calc-cont" fluid>
-        <v-text-field v-bind:options='{inputMask:"(###) ### ## ##"}'>
-        </v-text-field>
         <v-col>
             <h1 class="mb-16">
                     Рассчитайте стоимость <br> автомобиля в лизинг
@@ -18,10 +16,11 @@
                               <v-form ref="form">
                                 <p class="mb-8">Стоимость автомобиля</p>
                                 <v-text-field
+                                    
                                     color="orange"
                                     class="custom-text-field disabled-custom-field"
                                     height='68px'
-                                    type="number"
+
                                     outlined
                                     hide-details
                                     v-model="price"
@@ -37,7 +36,7 @@
                                 :min='1000000'
                                 :max='6000000'
                                 class="custom-slider"
-                                v-model="price"
+                                v-model="price" 
                                 >
                                 </v-slider>
                               </v-form>
@@ -56,7 +55,7 @@
                                     outlined
                                     hide-details
                                     readonly
-                                    v-model="firstRentValue"
+                                    v-model="firstRentValue" 
                                 >
                                 <h2
                                 slot="append"
@@ -123,49 +122,84 @@
                         v-model="dialog"
                         width="100%"
                       >
-
+                        
                         <template v-slot:activator="{ on, attrs }">
                           <v-btn rounded dark color="#ff9514" class="make-form-btn" v-bind="attrs" v-on="on">Оставить заявку</v-btn>
                         </template>
-
-                        <v-card>
-                          <v-card-title>
-                            <span class="headline mb-8 header-text"><p class="header-text">Онлайн-заявка</p></span>
-                          </v-card-title>
-                          <v-card-subtitle class="">
-                            <span>Заполните форму, и мы вскоре свяжемся с вами, чтобы ответить на все вопросы</span>
-                          </v-card-subtitle>
-                          <v-card-text>
-                            <v-container>
-                              <v-row>
+                        
+                        <v-card class="request-container d-flex justify-center align-center">
+                          <v-btn
+                                class="form-close-button"
+                                text
+                                rounded
+                                @click="dialog = false"
+                              >
+                                <v-icon dark>
+                                  mdi-window-close
+                                </v-icon>
+                          </v-btn>
+                          <div class="request-inner-container">
+                            
+                            <v-card-title>
+                              <span class="headline mb-8 header-text"><p class="header-text">Онлайн-заявка</p></span>
+                            </v-card-title>
+                            <v-card-subtitle class="request-form-subtitle">
+                              <span>Заполните форму, и мы вскоре свяжемся с вами, чтобы ответить на все вопросы</span>
+                            </v-card-subtitle>
+                            <v-card-text>
+                                <v-row>
+                                  
+                                  <v-col cols="12">
+                                    <div class="d-flex justify-space-between">
+                                      <v-text-field
+                                      v-mask="'+7 (###) ### ## ##'"
+                                      v-model="inputPhoneModel"
+                                      placeholder="+7 (921) 123 45 67"
+                                      color="orange"
+                                      class="custom-text-field request-form-text-field"
+                                      height='48px'
+                                      outlined
+                                      hide-details
+                                      label="Телефон"
+                                      
+                                    ></v-text-field>
+                                    <div class="request-form-inputs-divider"></div>
+                                     <v-text-field
+                                      color="orange"
+                                      class="custom-text-field request-form-text-field"
+                                      height='48px'
+                                      outlined
+                                      hide-details
+                                      label="Имя"
+                                    ></v-text-field>
+                                    </div>
+                                  </v-col>
+                                </v-row>
+                              <div class="d-flex justify-space-between request-form-subbody">
+                                <small class="requst-form-subbody-text">Нажимая на кнопку «Оставить заявку»,  я даю согласие <span class="requst-form-subbody-subtext">на обработку персональных данных</span></small>
+                                <div class="request-form-subbody-divider"></div>
+                                <v-btn
+                                  class="request-form-submit-button" 
+                                  dark depressed rounded color="#ff9514" 
+                                  >Оставить заявку</v-btn>
+                              </div>
+                              <div class="social-media-container d-flex justify-center">
+                                <v-btn
+                                  rounded
+                                  text
+                                >
+                                  <v-img src="/img/whatsapp.svg"></v-img>
+                                </v-btn>
+                                <v-btn
+                                  rounded
+                                  text
+                                >
+                                  <v-img src="/img/telegram.svg"></v-img>
+                                </v-btn>
                                 
-                                <v-col cols="12">
-                                  <v-text-field
-                                    label="Email*"
-                                    required
-                                  ></v-text-field>
-                                </v-col>
-                                <v-col cols="12">
-                                  <v-text-field
-                                    label="Password*"
-                                    type="password"
-                                    required
-                                  ></v-text-field>
-                                </v-col>
-                              </v-row>
-                            </v-container>
-                            <small>*indicates required field</small>
-                          </v-card-text>
-                          <v-card-actions>
-                            <v-spacer></v-spacer>
-                            <v-btn
-                              color="blue darken-1"
-                              text
-                              @click="dialog = false"
-                            >
-                              Close
-                            </v-btn>
-                          </v-card-actions>
+                              </div>
+                            </v-card-text>
+                          </div>
                         </v-card>
                       </v-dialog>
                     </v-row>
@@ -182,6 +216,7 @@
   export default {
     
     data: () => ({
+      inputPhoneModel: '+7 (',
       dialog: false,
       price: 1000000,
       firstRentPercent: 10,
@@ -248,7 +283,57 @@
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" scoped> 
+    
+    .request-container {
+      padding: 20px;
+      margin: none;
+      bottom: 0px;
+      height: 80vh;
+      .request-form-subtitle {
+        max-width: 450px;
+        font-size: 16px;
+        font-family: Gilroy;
+      }
+      .request-form-submit-button {
+        height: 48px !important;
+        width: 178px !important;
+        text-transform: none;
+        font-family: Gilroy;
+      }
+      .social-media-container {
+        margin-top: 42px;
+      }
+      .form-close-button {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+      }
+      .request-form-inputs-divider {
+        width: 32px;
+      }
+      .request-form-text-field {
+        border-radius: 16px;
+      }
+      .request-form-subbody {
+        border: solid 2px #F3F3F4;
+        border-radius: 12px;
+        margin-top: 32px;
+        padding: 29px 20px;
+        .request-form-subbody-divider {
+          width: 80px;
+        }
+      }
+      .requst-form-subbody-text {
+        font-size: 14px;
+        font-family: Gilroy;
+        max-width: 350px;
+        color: rgba(17, 17, 17, 0.5);
+        .requst-form-subbody-subtext {
+          color: black;
+        }
+      }
+    }
     
     .make-form-btn {
       box-shadow: none !important;

@@ -3,7 +3,7 @@
         <v-app-bar app flat color="white" class="nav-content-container clls"  >
 
             <div class=" container-logo d-flex justify-space-between align-center">
-                <v-btn text>
+                <v-btn text href="/">
                     <img src="/img/LeasingCar.svg" alt="">
                     <img src="/img/LeasingCar-1.svg" alt="">
                 </v-btn>
@@ -59,7 +59,10 @@
                                 v-for="(item, index) in navItems.filter((el) => !especialyButtons.includes(el.title))"
                                 :key="index"
                                 >
-                                <v-list-item-title class="simple-button"><v-btn v-bind="item.attr" class="simple-button">{{ item.title }}</v-btn></v-list-item-title>
+                                <v-list-item-title class="simple-button">
+                                    <v-btn v-bind="item.attr" class="simple-button">{{ item.title }}
+                                    </v-btn>
+                                </v-list-item-title>
                                 </v-list-item>
                             </v-col>
                             <v-col>
@@ -154,12 +157,12 @@
                 inner: [
                     { title: 'Для личного использования', attr: { text: true } },
                     { title: 'Для юредических лиц', attr: { text: true } },
-                    { title: 'Калькулятор', attr: { text: true } },
+                    { title: 'Калькулятор', attr: { text: true, href: 'calculatorPage' } },
                 ]
             },
-            { type: 'btn', title: 'Каталог', attr: { text: true } },
-            { type: 'btn', title: 'О нас', attr: { text: true } },
-            { type: 'btn', title: 'Оставить заявку', attr: { outlined: true, rounded: true, color: "#ff9514", class: "special-button"} },
+            { type: 'btn', title: 'Каталог', attr: { text: true, href: '/' } },
+            { type: 'btn', title: 'О нас', attr: { text: true, href: 'contacts' } },
+            { type: 'btn', title: 'Оставить заявку', attr: { outlined: true, rounded: true, color: "#ff9514", class: "special-button", href: '/' } },
         ],
         dialog: false,
     }),

@@ -16,9 +16,9 @@
   },
   "dependencies": {
     "core-js": "^3.9.1",
-    "moment": "^2.29.1",
     "nuxt": "^2.15.3",
-    "vuetify-mask": "^1.1.2"
+    "v-mask": "^2.2.4",
+    "vuejs": "^3.0.1"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
